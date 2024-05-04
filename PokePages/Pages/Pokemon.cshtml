@@ -1,0 +1,32 @@
+﻿@page
+@model PokePages.Pages.PokemonModel
+@{
+}
+
+<h1>Pokemon @Model.Pokemon</h1>
+<div id="Pokemon">
+    <h3 id="PokemonName"></h3>
+    <img id="PokemonImage" src="" />
+</div>
+
+<script>
+    const apiUrl = 'https://pokeapi.co/api/v2/pokemon/@Model.Pokemon';
+    console.log(apiUrl)
+
+    // Make a GET request
+    data = fetch(apiUrl)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log("Test");
+            console.log(data.name);
+            document.getElementById("Pokemon").innerHTML = data.name;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+</script>
